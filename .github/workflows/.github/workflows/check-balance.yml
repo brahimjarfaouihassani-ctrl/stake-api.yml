@@ -1,0 +1,32 @@
+name: Check Stake Balance  # Name of the workflow
+
+# Trigger the workflow on push to the 'main' branch
+on:
+  push:
+    branches:
+      - main  # Runs when changes are pushed to the 'main' branch
+
+jobs:
+  check_balance:  # Job name (you can call it anything you want)
+    runs-on: ubuntu-latest  # Use Ubuntu latest environment
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository code
+        uses: actions/checkout@v3  # Checks out your repository's code to the action's environment
+
+      # Step 2: Set up Python (3.9 version)
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'  # Specify the Python version
+
+      # Step 3: Install dependencies (requests library)
+      - name: Install dependencies
+        run: pip install requests  # Install the `requests` library needed to call the API
+
+      # Step 4: Run the Python script to check the Stake balance
+      - name: Check Stake Balance
+        env:
+          STAKE_API_TOKEN: ${{ secrets.STAKE_API_TOKEN }}  # Fetch the token from GitHub Secrets
+        run: python check_balance.py  # Run your Python script (you need to create this script)
