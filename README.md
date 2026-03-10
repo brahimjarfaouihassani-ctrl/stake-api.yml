@@ -11,3 +11,4 @@ This repository contains code to integrate with the Stake API using GitHub Actio
 ## Getting Started
 
 See the workflow files in `.github/workflows/` for examples.
+## Workflow triggered
