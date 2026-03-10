@@ -1,0 +1,23 @@
+name: Check Stake Balance
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  check_balance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: Install requests library
+        run: pip install requests
+      
+      - name: Check Balance
+        env:
+          STAKE_API_TOKEN: ${{ secrets.STAKE_API_TOKEN }}
+        run: python check_balance.py
